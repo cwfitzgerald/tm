@@ -22,7 +22,7 @@ macro_rules! print_flush {
 static INTERRUPTED: AtomicBool = AtomicBool::new(false);
 
 fn signal_handler() {
-    INTERRUPTED.store(true, Ordering::AcqRel);
+    INTERRUPTED.store(true, Ordering::Release);
 }
 
 fn read_input<R, E>() -> R
@@ -183,8 +183,10 @@ fn run_tm(input: &str, transitions: &TransitionStore) {
         unsafe { register(SIGINT, signal_handler) }.expect("Unable to set signal on SIGINT");
     while current_state != "f" {
         if INTERRUPTED.swap(false, Ordering::AcqRel) {
-            println!("Interrupted!");
             unregister(signal);
+            println!("Interrupted!");
+            accepted = false;
+            break;
         }
         print_id(&tape, &current_state, tape_idx);
         let source = TransitionSource {
