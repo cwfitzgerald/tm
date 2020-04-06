@@ -6,7 +6,7 @@ so I expect no issues.
 
 ## Running
 
-To run, just call the command `./tm` and it will ask for all the info it needs. For ease of testing
+To run, just call the command `./connor-fitzgerald-tm` and it will ask for all the info it needs. For ease of testing
 I also made it accept the path to the code as the first argument, so you may do that if you so
 choose.
 
