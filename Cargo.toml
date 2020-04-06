@@ -7,11 +7,17 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+# Used to parse the input file as if it was a csv with ' ' as a delim
 csv = "1.1.3"
+# Generic automatic serialization/deserialization
 serde = { version = "1.0.106", features = ["derive"] }
+# Set/Unset unix signals
 signal-hook = "0.1.13"
+# Helpful iterator adaptors and such
 itertools = "0.9.0"
+# Lightweight arg parsing
 pico-args = "0.3.1"
 
 [profile.release]
+# Link time optimization should make things faster
 lto = true
